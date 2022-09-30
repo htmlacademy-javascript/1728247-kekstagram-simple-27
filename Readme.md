@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм (простой)»
 
 * Студент: [Мария Крымова](https://up.htmlacademy.ru/javascript/27/user/1728247).
-* Наставник: `Неизвестно`.
+* Наставник: [Мария Филиппова](https://htmlacademy.ru/profile/wonderjs).
 
 ---
 
