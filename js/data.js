@@ -1,6 +1,4 @@
-import {getRandomElement} from './util.js';
-import {getRandomNumber} from './util.js';
-import {checkStringLength} from './util.js';
+import {getRandomNumber, getRandomElement, checkStringLength} from './util.js';
 
 const PHOTO_AMOUNT = 25;
 
@@ -48,6 +46,4 @@ const getPhoto = (amount) => {
   return items;
 };
 
-const photos = getPhoto(PHOTO_AMOUNT);
-
-export {photos};
+export {getPhoto, PHOTO_AMOUNT};
