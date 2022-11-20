@@ -11,6 +11,4 @@ const getRandomElement = (array) => array[getRandomNumber(0, array.length - 1)];
 
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
-export {getRandomNumber};
-export {getRandomElement};
-export {checkStringLength};
+export {getRandomNumber, getRandomElement, checkStringLength};

@@ -1,6 +1,8 @@
-import {photos} from './data.js';
 import './form.js';
 import './slider.js';
+import {renderPhotos} from './card.js';
+import {getPhoto, PHOTO_AMOUNT} from './data.js';
 
-// eslint-disable-next-line no-console
-console.log(photos);
+const photos = getPhoto(PHOTO_AMOUNT);
+
+renderPhotos(photos);
