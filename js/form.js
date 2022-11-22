@@ -1,4 +1,6 @@
 import {isEscapeKey} from './util.js';
+import {resetScale} from './scale.js';
+import {resetEffects} from './effects.js';
 
 const modalElement = document.querySelector('.img-upload__overlay');
 const bodyElement = document.querySelector('body');
@@ -23,6 +25,8 @@ function closeUserModal () {
   bodyElement.classList.remove('modal-open');
 
   uploadFileElement.value = '';
+  resetScale();
+  resetEffects();
 
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
