@@ -6,6 +6,7 @@ const modalElement = document.querySelector('.img-upload__overlay');
 const bodyElement = document.querySelector('body');
 const uploadFileElement = document.querySelector('#upload-file');
 const cancelButtonElement = document.querySelector('#upload-cancel');
+/*const submitButtonElement = document.querySelector('#upload-submit');*/
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -25,6 +26,7 @@ function closeUserModal () {
   bodyElement.classList.remove('modal-open');
 
   uploadFileElement.value = '';
+  document.querySelector('.text__description').reset();
   resetScale();
   resetEffects();
 
@@ -38,3 +40,17 @@ uploadFileElement.addEventListener('change', () => {
 cancelButtonElement.addEventListener('click', () => {
   closeUserModal();
 });
+
+const setUserFormSubmit = (onSuccess) => {
+  document.querySelector('#upload-select-image').addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const formData = new FormData(evt.target);
+    fetch('https://27.javascript.pages.academy/kekstagram-simple',
+      {
+        method: 'POST',
+        body: formData,
+      },).then(() => onSuccess);
+  });
+};
+
+export {setUserFormSubmit};

@@ -1,7 +1,12 @@
 import './form.js';
 import {renderPhotos} from './card.js';
-import {getPhoto, PHOTO_AMOUNT} from './data.js';
+import {setUserFormSubmit} from './form.js';
+import {showSuccessMessage, showErrorMessage} from './messages.js';
 
-const photos = getPhoto(PHOTO_AMOUNT);
+fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
+  .then((response) => response.json())
+  .then((photos) => {
+    renderPhotos(photos);
+  });
 
-renderPhotos(photos);
+setUserFormSubmit(showSuccessMessage || showErrorMessage);
