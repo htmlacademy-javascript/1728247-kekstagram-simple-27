@@ -1,7 +1,9 @@
 import './form.js';
 import {renderPhotos} from './card.js';
-import {getPhoto, PHOTO_AMOUNT} from './data.js';
+import {setUserFormSubmit} from './form.js';
+import {getData} from './api.js';
+import {showAlert} from './util.js';
 
-const photos = getPhoto(PHOTO_AMOUNT);
+getData(renderPhotos, showAlert);
 
-renderPhotos(photos);
+setUserFormSubmit();
