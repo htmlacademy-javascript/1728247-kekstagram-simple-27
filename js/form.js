@@ -43,7 +43,7 @@ cancelButtonElement.addEventListener('click', () => {
   closeUserModal();
 });
 
-const setUserFormSubmit = (onSuccess) => {
+const setUserFormSubmit = () => {
   document.querySelector('#upload-select-image').addEventListener('submit', (evt) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
