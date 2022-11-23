@@ -2,7 +2,9 @@ const ALERT_SHOW_TIME = 5000;
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const showAlert = (message) => {
+const ERROR_MESSAGE = 'Не удалось загрузить данные. Попробуйте ещё раз.';
+
+const showAlert = (message = ERROR_MESSAGE) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';

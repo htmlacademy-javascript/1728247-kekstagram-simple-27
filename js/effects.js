@@ -1,7 +1,3 @@
-const image = document.querySelector('.img-upload__preview img');
-const form = document.querySelector('.img-upload__form');
-const sliderElement = document.querySelector('.effect-level__slider');
-const effectLevel = document.querySelector('.effect-level__value');
 const EFFECTS = [
   {
     name: 'none',
@@ -52,13 +48,17 @@ const EFFECTS = [
 ];
 
 const DEFAULT_EFFECT = EFFECTS[0];
+const image = document.querySelector('.img-upload__preview img');
+const form = document.querySelector('.img-upload__form');
+const slider = document.querySelector('.effect-level__slider');
+const effectLevel = document.querySelector('.effect-level__value');
 let chosenEffect = DEFAULT_EFFECT;
 
 const isDefault = () => chosenEffect === DEFAULT_EFFECT;
 
 const updateSlider = () => {
-  sliderElement.classList.remove('hidden');
-  sliderElement.noUiSlider.updateOptions({
+  slider.classList.remove('hidden');
+  slider.noUiSlider.updateOptions({
     range: {
       min: chosenEffect.min,
       max: chosenEffect.max,
@@ -67,7 +67,7 @@ const updateSlider = () => {
     start: chosenEffect.max,
   });
   if (isDefault()) {
-    sliderElement.classList.add('hidden');
+    slider.classList.add('hidden');
   }
 };
 
@@ -86,7 +86,7 @@ const onSliderUpdate = () => {
   if (isDefault()) {
     return;
   }
-  const sliderValue = sliderElement.noUiSlider.get();
+  const sliderValue = slider.noUiSlider.get();
   image.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
   image.classList.add(`effects__preview--${chosenEffect.name}`);
   effectLevel.value = sliderValue;
@@ -97,7 +97,7 @@ const resetEffects = () => {
   updateSlider();
 };
 
-noUiSlider.create(sliderElement, {
+noUiSlider.create(slider, {
   range: {
     min: DEFAULT_EFFECT.min,
     max: DEFAULT_EFFECT.max,
@@ -109,6 +109,6 @@ noUiSlider.create(sliderElement, {
 updateSlider();
 
 form.addEventListener('change', onFormChange);
-sliderElement.noUiSlider.on('update', onSliderUpdate);
+slider.noUiSlider.on('update', onSliderUpdate);
 
 export {resetEffects};
