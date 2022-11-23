@@ -2,13 +2,14 @@ import {isEscapeKey} from './util.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effects.js';
 import {showErrorMessage, showSuccessMessage} from './messages.js';
-import { sendData } from './api.js';
+import {sendData} from './api.js';
 
-const modalElement = document.querySelector('.img-upload__overlay');
-const bodyElement = document.querySelector('body');
-const uploadFileElement = document.querySelector('#upload-file');
-const cancelButtonElement = document.querySelector('#upload-cancel');
-/*const submitButtonElement = document.querySelector('#upload-submit');*/
+const modal = document.querySelector('.img-upload__overlay');
+const body = document.querySelector('body');
+const uploadFile = document.querySelector('#upload-file');
+const cancelButton = document.querySelector('#upload-cancel');
+const submitButton = document.querySelector('#upload-submit');
+const form = document.querySelector('#upload-select-image');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -16,41 +17,59 @@ const onPopupEscKeydown = (evt) => {
     closeUserModal();}
 };
 
-function openUserModal () {
-  modalElement.classList.remove('hidden');
-  bodyElement.classList.add('modal-open');
+const openUserModal = () => {
+  modal.classList.remove('hidden');
+  body.classList.add('modal-open');
 
   document.addEventListener('keydown', onPopupEscKeydown);
-}
+};
 
 function closeUserModal () {
-  modalElement.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
+  modal.classList.add('hidden');
+  body.classList.remove('modal-open');
 
-  uploadFileElement.value = '';
-  document.querySelector('.text__description').reset();
+  uploadFile.value = '';
+  form.reset();
   resetScale();
   resetEffects();
 
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
-uploadFileElement.addEventListener('change', () => {
+uploadFile.addEventListener('change', () => {
   openUserModal();
 });
 
-cancelButtonElement.addEventListener('click', () => {
+cancelButton.addEventListener('click', () => {
   closeUserModal();
 });
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+};
+
+const onSuccessSubmit = () => {
+  showSuccessMessage();
+  closeUserModal();
+};
+
+const onErrorSubmit = () => {
+  showErrorMessage();
+};
+
 const setUserFormSubmit = () => {
-  document.querySelector('#upload-select-image').addEventListener('submit', (evt) => {
+  form.addEventListener('submit', (evt) => {
     evt.preventDefault();
+    blockSubmitButton();
     const formData = new FormData(evt.target);
-    sendData(showSuccessMessage, showErrorMessage, formData)
-      .then(()=>closeUserModal());
+    sendData(onSuccessSubmit, onErrorSubmit, formData)
+      .then(()=>unblockSubmitButton());
   }
   );
 };
 
-export {setUserFormSubmit};
+export {setUserFormSubmit, body};
