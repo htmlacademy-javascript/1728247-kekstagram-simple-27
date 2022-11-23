@@ -1,6 +1,8 @@
 import {isEscapeKey} from './util.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effects.js';
+import {showErrorMessage, showSuccessMessage} from './messages.js';
+import { sendData } from './api.js';
 
 const modalElement = document.querySelector('.img-upload__overlay');
 const bodyElement = document.querySelector('body');
@@ -45,12 +47,10 @@ const setUserFormSubmit = (onSuccess) => {
   document.querySelector('#upload-select-image').addEventListener('submit', (evt) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
-    fetch('https://27.javascript.pages.academy/kekstagram-simple',
-      {
-        method: 'POST',
-        body: formData,
-      },).then(() => onSuccess);
-  });
+    sendData(showSuccessMessage, showErrorMessage, formData)
+      .then(()=>closeUserModal());
+  }
+  );
 };
 
 export {setUserFormSubmit};

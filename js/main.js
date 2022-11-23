@@ -2,11 +2,9 @@ import './form.js';
 import {renderPhotos} from './card.js';
 import {setUserFormSubmit} from './form.js';
 import {showSuccessMessage, showErrorMessage} from './messages.js';
+import {getData, sendData} from './api.js';
+import {showAlert} from './util.js';
 
-fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
-  .then((response) => response.json())
-  .then((photos) => {
-    renderPhotos(photos);
-  });
+getData(renderPhotos, showAlert);
 
-setUserFormSubmit(showSuccessMessage || showErrorMessage);
+setUserFormSubmit();
